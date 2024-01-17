@@ -39,11 +39,12 @@ int main()
 
     int N, M;
     cin>> N >> M;
+    int level=0;
 
     vector<int> nums(M);
     vector<int> flag(N,0);
 
-    BT(nums,flag,N,M,0);
+    BT(nums,flag,N,M,level);
 
     return 0;
 }
