@@ -22,7 +22,7 @@ void stat(vector<vector<int>> &S, int idx, int cnt)
     {
         for(int i = 0; i < N; i++)
         {
-            // 팀 구성
+            // 팀 분류
             if(flag[i] == true) 
                 start.push_back(i);
             else 
@@ -50,6 +50,7 @@ void stat(vector<vector<int>> &S, int idx, int cnt)
         return;
     }
 
+    // 팀 구성
     for(int i = idx; i < N; i++)
     {
         if(!flag[i])
