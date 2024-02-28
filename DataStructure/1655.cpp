@@ -1,4 +1,4 @@
-// BOJ 백준 1655번 가운데를 말해요
+// BOJ 백준 1655번 보석도둑
 #include <iostream>
 #include <vector>
 #include <algorithm>
