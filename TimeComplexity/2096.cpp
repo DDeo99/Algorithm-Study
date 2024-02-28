@@ -1,71 +1,43 @@
 // BOJ 백준 2096번 내려가기
 #include <iostream>
 #include <vector>
+#include <cstring>
 #include <algorithm>
 
 using namespace std;
 
 int N;
 
-short maxDp[3];
-short minDp[3];
-short minTemp[3];
-short maxTemp[3];
+ vector<int> maxDP(3,0), minDP(3,0);
+ vector<int> nextMaxDP(3), nextMinDP(3);
 
 int main()
 {
 	cin >> N;
-
-	for (int i = 0; i < N; i++)
+	
+	for(int i=0;i<N;i++)
 	{
-		for (int j = 0; j < 3; j++)
-		{
-			int num;
-			cin >> num;
-			
-			if (i == 0)
-			{
-				maxDp[j] = num;
-				minDp[j] = num;
-			}
+		int a,b,c;
+		cin>>a>>b>>c;
 
-			else
-			{
-				if (j == 0)
-				{
-					int maxRes = max(maxDp[0], maxDp[1]) + num;
-					maxTemp[0] = maxRes;
+		// DP[0]은 0번 인덱스에 올 수 있는 가장 큰 값 or 가장 작은 값
+		// 그림에 현혹 X
+		
+		nextMaxDP[0]=max(maxDP[0],maxDP[1])+a;
+		nextMaxDP[1]=max(max(maxDP[0],maxDP[1]),maxDP[2])+b;
+		nextMaxDP[2]=max(maxDP[1],maxDP[2])+c;
+		maxDP=nextMaxDP;
 
-					int minRes = min(minDp[0], minDp[1]) + num;
-					minTemp[0] = minRes;
-				}
-				else if (j == 1)
-				{
-					int maxRes = max(max(maxDp[0], maxDp[1]), maxDp[2]) + num;
-					maxTemp[1] = maxRes;
+		nextMinDP[0]=min(minDP[0],minDP[1])+a;
+		nextMinDP[1]=min(min(minDP[0],minDP[1]),minDP[2])+b;
+		nextMinDP[2]=min(minDP[1],minDP[2])+c;
+		minDP=nextMinDP;
+	}
 
-					int minRes = min(min(minDp[0], minDp[1]), minDp[2]) + num;
-					minTemp[1] = minRes;
-				}
+	sort(maxDP.begin(),maxDP.end());
+	sort(minDP.begin(),minDP.end());
 
-				else if (j == 2)
-				{
-					int maxRes = max(maxDp[1], maxDp[2]) + num;
-					maxTemp[2] = maxRes;
+	cout<<maxDP[2]<<" "<<minDP[0];
 
-					int minRes = min(minDp[1], minDp[2]) + num;
-					minTemp[2] = minRes;
-				}
-
-			}
-			maxDp[0] = maxTemp[0]; maxDp[1] = maxTemp[1]; maxDp[2] = maxTemp[2];
-			minDp[0] = minTemp[0]; minDp[1] = minTemp[1]; minDp[2] = minTemp[2];
-			}
-
-		}
-	
-
-	cout << max(max(maxDp[0], maxDp[1]), maxDp[2]) << " " << min(min(minDp[0], minDp[1]), minDp[2]);
-	
 	return 0;
 }
