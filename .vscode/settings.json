@@ -6,6 +6,7 @@
         "string": "cpp",
         "vector": "cpp",
         "*.tcc": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "queue": "cpp"
     }
 }
