@@ -13,8 +13,9 @@ int connect;
 queue<int> q;
 vector<vector<int>> computers;
 vector<bool> visited;
-int ans=0;
-
+//int ans=0;
+int ans=-1;
+/*
 int main()
 {
     ios::sync_with_stdio(false);
@@ -58,6 +59,54 @@ int main()
 
     cout<<ans;
 
+
+    return 0;
+}
+*/
+
+void dfs(int cur)
+{
+    if(visited[cur]==1)
+        return;
+
+    visited[cur]=1;
+    ans++;
+
+    for(int i=0;i<computers[cur].size();i++)
+    {
+        int next=computers[cur][i];
+        dfs(next);
+    }
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+     ios::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+    cin>>N;
+    cin>>connect;
+
+    computers.resize(N+1);
+    visited.resize(N+1,0);
+
+    for(int i=0;i<connect;i++)
+    {
+        int from, to;
+        cin>>from>>to;
+
+        // 양방향 연결에 주의!!
+        computers[from].push_back(to);
+        computers[to].push_back(from);
+    }
+
+    int cur=1;
+    dfs(cur);
+
+    cout<<ans;
 
     return 0;
 }
