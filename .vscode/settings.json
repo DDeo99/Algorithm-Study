@@ -8,6 +8,7 @@
         "*.tcc": "cpp",
         "set": "cpp",
         "queue": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "cmath": "cpp"
     }
 }
