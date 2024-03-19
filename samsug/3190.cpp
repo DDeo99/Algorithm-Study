@@ -1,4 +1,5 @@
 // BOJ 백준 3190번 뱀
+/*
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -93,6 +94,98 @@ int main()
         }
     }
     cout<<t;
+
+
+    return 0;
+}
+*/
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+queue<pair<int,int>> snake;
+queue<pair<int,char>> change;
+vector<vector<int>> map;
+int N,K,L;
+
+// 상 좌 하 우
+// 왼쪽 -> +1  오른쪽 -> +3
+int dx[]={0,-1,0,1}; 
+int dy[]={-1,0,1,0};
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+
+    cin>>N;
+    map.resize(N+1,vector<int>(N+1));
+
+    int x=1;
+    int y=1;
+    snake.push({y,x});
+    map[y][x]=1;
+
+    cin>>K;
+    for(int i=0;i<K;i++)
+    {
+        int y,x;
+        cin>>y>>x;
+        // 사과
+        map[y][x]=2;
+    }
+
+    cin>>L;
+    for(int i=0;i<L;i++)
+    {
+        int X; char C;
+        cin>>X>>C;
+        change.push({X,C});
+    }
+
+    int ans=0;
+    int idx=3;
+    while(1)
+    {
+        y+=dy[idx];
+        x+=dx[idx];
+        ans++;
+
+        if(y<1 || y>N || x<1 || x>N)
+            break;
+        if(map[y][x]==1)
+            break;
+        else if(map[y][x]==2)
+        {
+            map[y][x]=1;
+            snake.push({y,x});
+        }
+        else if(map[y][x]==0)
+        {
+            map[y][x]=1;
+            snake.push({y,x});
+            map[snake.front().first][snake.front().second]=0;
+            snake.pop();
+        }
+
+        if(!change.empty())
+        {
+            if(change.front().first==ans)
+            {
+                char C=change.front().second;
+                if(C=='L')
+                    idx=(idx+1)%4;
+                else if(C=='D')
+                    idx=(idx+3)%4;
+                change.pop();      
+            }
+        }
+    }
+    cout<<ans;
 
 
     return 0;
