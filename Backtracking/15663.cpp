@@ -1,12 +1,14 @@
-// BOJ 백준 15664번 N과M(10)
+// BOJ 백준 15663번 N과M(9)
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <set>
+#include <queue>
 
 using namespace std;
 
 int N,M;
+
 vector<int> nums;
 vector<int> res;
 vector<bool> visited;
@@ -50,7 +52,8 @@ int main()
         cin>>nums[i];
     }
     sort(nums.begin(),nums.end());
-    dfs(0);
+    int start=0;
+    dfs(start);
 
     for(auto e:s)
     {
