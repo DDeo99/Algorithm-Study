@@ -66,6 +66,9 @@ int findDirection(Runner r)
 
         if(ny<1 || ny>N || nx<1 || nx>N)
             continue;
+
+        if(map[ny][nx]!=0)
+            continue;
         
         int nextDist=getDist(ny,nx);
 
@@ -168,7 +171,7 @@ void rotateSquare()
             int resultX=length-moveY-1;
 
             // 다시 좌측 상단을 y,x로 이동
-            newMap[resultY+y][resultX+x]=map[y][x];
+            newMap[resultY+y][resultX+x]=map[i][j];
         }
     }
 
@@ -272,6 +275,7 @@ int main()
         moveRunner();
         if(isComplete)
             break;
+        square.clear();
         makeSquare();
         rotateSquare();
         rotateTAE();
